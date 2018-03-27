@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>一款清新的jQuery日历插件DEMO演示</title>
+		<link rel="stylesheet" href="css/calendar.css">
+	</head>
+	<style>
+		.qd {
+			background-image: url(img/qd.png);
+			background-repeat: no-repeat;
+			background-size: 100% 100%;
+			-moz-background-size: 100% 100%;
+		}
+	</style>
+
+	<body>
+
+		<div id="calendar" class="calendar"></div>
+
+		<script src="js/jquery.min.js"></script>
+		<script src="js/calendar.js"></script>
+
+		<div style="text-align:center;clear:both">
+
+		</div>
+		<script>
+			$(function() {
+				$('#calendar').calendar({
+					ifSwitch: true, // 是否切换月份
+					hoverDate: true, // hover是否显示当天信息
+					backToday: true, // 是否返回当天
+					dataStr: "20180306,20180307"
+				});
+				$("li").click(function() {
+
+					var ts = returnDateStr(new Date());
+					var ns = $(this).attr("id");
+					if(ts == ns) {
+						$(this).addClass("qd");
+					} else {
+						alert("不允许补签！");
+					}
+				});
+
+				function returnDateStr(date) { // 日期转字符串
+					var year = date.getFullYear();
+					var month = date.getMonth() + 1;
+					var day = date.getDate();
+
+					month = month <= 9 ? ('0' + month) : ('' + month);
+					day = day <= 9 ? ('0' + day) : ('' + day);
+
+					return year + month + day;
+				}
+			});
+		</script>
+	</body>
+
+</html>
